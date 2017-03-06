@@ -1,0 +1,35 @@
+Виртуальные хосты
+
+mkdir /etc/nginx/sites-available настройки сайта
+mkdir /etc/nginx/sites-enabled символьные ссылки
+
+создать папку хоста mkdir /var/www/example.org
+
+созадать конфиг хоста touch /etc/nginx/sites-available/example.org.conf
+
+добавим в фаил
+sudo vim /etc/nginx/sites-available/test.loc.conf
+server {
+  listen 80;
+
+  server_name test.loc;
+  charset utf-8;
+
+  root /var/www/test.loc;
+  index index.html index.htm index.php;
+
+  access_log /var/log/nginx/test.loc_access.log;
+  error_log /var/log/nginx/test.loc_error.log;
+}
+
+server {
+
+  listen 80;
+
+  server_name www.test.loc;
+  rewrite ^(.*) http://test.loc$1 permanent;
+}
+
+добавим символьную ссылку ln -s /etc/nginx/sites-available/example.org.conf  /etc/nginx/sites-enabled/
+
+sudo service nginx reload перезагрузим

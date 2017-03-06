@@ -1,0 +1,19 @@
+Команды Apache 2.4
+
+// создают или удаляют символьную ссылку в каталоге который читает сервер
+a2enconf / a2disconf вкл/выкл конфигурацию сервера
+a2enmod / a2dismod вкл/выкл модули
+a2ensite / a2dissite вкл/выкл виртуальные хосты
+
+sudo apache2ctl start           Запуск Apache2 демона
+sudo apache2ctl stop            Остановка Apache2 демона
+sudo apache2ctl graceful-stop   Мягкая остановка Apache2 демона
+sudo apache2ctl restart         Перезапуск Apache2 демона
+sudo apache2ctl graceful        Мягкий перезапуск Apache2 демона - рекомендуется делать на проде
+sudo apache2ctl fullstatus      Вывести полный отчет статуса Apache2
+sudo apache2ctl status          Вывести отчет статуса Apache2
+sudo apache2ctl configtest      Тестирование конфигурации Apache2
+sudo apache2ctl startssl        Запуск Apache2 с ssl
+sudo apache2ctl help            Выводит справку к apache2ctl
+
+sudo service apache2 restart - перезагрузка сервера

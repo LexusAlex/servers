@@ -1,0 +1,110 @@
+Проблемы окружения
+
+Придумать кнопку : Опубликовать приложение где угодно
+
+Проблема, много стеков, как каждую технологию развернуть из всех возможных бекендов
+
+Важный аспект - это изоляция
+
+Разработчик - код
+Оператор - Инфраструктура
+
+Изолирование в linux
+
+Контейнер pid, net, ips, mnt,
+
+
+Обычные процессы ядра | ns1 php 5.3 nginx 1.7 | ns2 php 7 nginx 1.4
+                    Ядро линукс
+Все свое
+
+Docker - 2014
+Поддерживает разные среды выполнения и доставки
+Система упаковки и доставки приложений
+
+Цель - не создать изолированное окружение,
+а запустить приложение
+
+Приведение приложения к виду удобному к использованию в докер контейнере
+
+Не будет конфликтов контроль версий
+registry - реестр образов
+scratch - null
+ubuntu - apache2 php5 wordpress
+mysql
+
+Похоже на гит DockerHub
+redis, ubuntu mysql nginx centos postgres
+
+Автоматическая сборка
+
+Dockerfile - похож на makefile
+
+FROM
+ENV
+RUN
+ADD
+CMD
+
+Docker это
+Командная строка
+RESTful Api
+Импорт - экспорт единый формат
+
+aufs - драйвер
+
+
+Порядок действий при создании своего базового образа
+1. создать папку образа
+2. Создать Dockerfile - скрипт для создания образа
+3. Запустить build docker build -t lexusalex/test .
+4. Образ создан
+
+Порядок действий при создании образа уже с приложением
+1. Склонировать реп
+2. Создать Dockerfile
+3. docker build -t lexusalex/test .
+4. образ готов
+
+Запуск чтобы он потом удалился
+
+docker run -ti --rm -p 8080:8080 lexusalex/test-hello
+
+docker run -d -p :5000:5000 lexusalex/test-hello
+docker run -d --name test/app
+
+работает в ОС
+f962f7c967fa643b1e732a072ae4b5131069dfb23ff941406183fcad99b9a148
+
+Образ - файловая система
+Контейнер - запущенный экзепляр образа
+
+Команды
+docker pull tutum/wordpress скачать образ
+docker run -p 80:80 tutum/wordpress
+docker port [CONTAINER] порты контейнера
+
+docker run -v ~/Desktop/php-solutions/src/docker/test/:/var/www/srv/ -p 5000:80 -t -i rhamdeew/lamp /bin/bash
+
+docker stop остановка контейнера
+docker info  - инфо о докере
+docker images - список образов
+docker ps - запущенные контейнеры
+docker ps -a - все контейнеры в системе
+docker rm $(docker ps -a -q) - удалить контейнеры
+docker rmi $(docker images -q) - удалить образы
+
+docker-compose up -d запуск в фоне
+docker-compose stop - остановить контейнер
+docker-compose kill - удалить контейнер
+docker exec -it app-php-php-fpm /bin/bash
+
+docker search ubuntu поиск по образам
+docker pull ubuntu загрузить образ из реестра
+docker create ubuntu:14.04 создать контейнер из образа
+docker run -i -t ubuntu:14.04 /bin/bash запуск контейнера но выйдет как только выйдем из командной строки
+docker run -i -t -d ubuntu:14.04 /bin/sh теперь контейнер будет работать постоянно
+docker exec -i -t jolly_swartz /bin/bash подключится к работающему контейнеру
+docker stop NAME/ContainerID  остановить контейнер
+docker start NAME/ContainerID запуск контейнера
+

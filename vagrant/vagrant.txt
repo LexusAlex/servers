@@ -1,0 +1,66 @@
+vagrant up -  Эта команда смотрит в Vagrantfile и создаёт виртуальную машину согласно описанию
+vagrant destroy -  Эта команда уничтожает машину полностью
+vagrant destroy -f  - удалить машину без подтверждения
+vagrant suspend Эта команда отправляет машину в сон
+vagrant resume эта команда пробуждает машину из сна.
+vagrant ssh подключиться к машине
+vagrant halt выключить машину
+vagrant port список проброшенных портов
+vagrant reload перезагрузка машины
+
+ubuntu16: SSH address: 127.0.0.1:2222
+ubuntu16: SSH username: ubuntu
+ubuntu16: SSH auth method: password
+
+Vagrantfile
+# служебные строки
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# цикл
+Vagrant.configure("2") do |config|
+  # образ который нужно скачать https://atlas.hashicorp.com/boxes/search
+  config.vm.box = "ubuntu/xenial32"
+
+  # проверять ли обновленяи боксов
+  config.vm.box_check_update = false
+
+  # имя хоста и вирт машины
+  config.vm.hostname = "ubuntu16"
+  config.vm.define "ubuntu16"
+
+   config.vm.provider "virtualbox" do |vb|
+    # Нужен ли графический интерфейс
+    vb.gui = false
+    # память под вирт машину
+    vb.memory = "1024"
+    end
+
+  # config.vm.network "private_network", ip: "192.168.33.10"
+  # config.vm.network "public_network"
+  # config.vm.network "forwarded_port", guest: 80, host: 8080
+  # http://localhost:9999
+  # config.vm.network  "forwarded_port", guest: 80, host: 9999, auto_correct: true
+
+
+  # «Из коробки» vagrant синхронизирует каталог хоста с Vagrantfile в директорию /vagrant виртуальной машины.
+  # Здесь можно указать доп хосты
+  # config.vm.synced_folder "../data", "/vagrant_data"
+
+
+  # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
+  # such as FTP and Heroku are also available. See the documentation at
+  # https://docs.vagrantup.com/v2/push/atlas.html for more information.
+  # config.push.define "atlas" do |push|
+  #   push.app = "YOUR_ATLAS_USERNAME/YOUR_APPLICATION_NAME"
+  # end
+
+  # Enable provisioning with a shell script. Additional provisioners such as
+  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
+  # documentation for more information about their specific syntax and use.
+  # config.vm.provision "shell", inline: <<-SHELL
+  #   apt-get update
+  #   apt-get install -y apache2
+  # SHELL
+end
+

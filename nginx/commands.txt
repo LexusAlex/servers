@@ -1,0 +1,5 @@
+
+nginx -s quit плавное выключение
+nginx -s reload перезагрузка
+
+ps -ax | grep nginx

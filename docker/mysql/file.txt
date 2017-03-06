@@ -1,0 +1,5 @@
+docker run \
+    --name=mysql5-7 \
+    -v mysql5-7-data:/var/lib/mysql \
+    -p 172.17.0.1:3306:3306 \
+    -d private/mysql;

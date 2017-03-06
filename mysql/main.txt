@@ -1,0 +1,18 @@
+В данный момент последняя версия это 5.7 ubuntu 16.04
+
+sudo apt-get update
+sudo apt-get install mysql-server
+sudo mysql_secure_installation
+
+Проверка установки
+mysqladmin -p -u root version
+
+Конфиг в новой версии лежит здесь
+
+sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf
+
+sudo service mysql restart
+
+mysql -p -u root
+
+GRANT ALL PRIVILEGES ON *.* TO 'outuser'@'%' IDENTIFIED BY '...' WITH GRANT OPTION

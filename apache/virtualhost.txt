@@ -1,0 +1,51 @@
+Пример
+
+<VirtualHost *:80>
+    ServerName test.loc
+    ServerAdmin mail@zend.loc
+    #ServerAlias www.example.com
+    DocumentRoot /var/www/test.loc
+    CustomLog ${APACHE_LOG_DIR}/test.loc.access.log combined
+    ErrorLog ${APACHE_LOG_DIR}/test.loc.error.log
+    #AssignUserID andrey andrey
+    <Directory /var/www/test.loc>
+        Options -Includes -Indexes -ExecCGI
+        AllowOverride All
+    </Directory>
+</VirtualHost>
+
+Смена прав
+chmod -R 644 /dir_name
+find /dir_name -type d -exec chmod 755 {} \;
+Меняем владельца
+sudo chown -R alex:alex www
+
+
+apachectl
+
+Перезапустить апач
+sudo /etc/init.d/apache2 restart
+
+mods-available и sites-available настройки модулей и сайтов
+
+Чтобы создать виртуальных хост нужно
+1. создать папку хоста mkdir /var/www/zend.loc или переименовать mv /var/www/php.loc /var/www/backend.torg94.loc
+2. назначить ей права chown alexey:alex /var/www/example.com
+3. создать фаил виртуального хоста sudo touch /etc/apache2/sites-available/zend.loc.conf или переименовать mv /etc/apache2/sites-available/zend.loc.conf /etc/apache2/sites-available/backend.torg94.loc.conf
+4. открыть фаил sudo vim /etc/apache2/sites-available/zend.loc.conf и вставить в этот фаил текст
+<VirtualHost *:80>
+    ServerName zend.loc
+    ServerAdmin mail@zend.loc
+    #ServerAlias www.example.com
+    DocumentRoot /var/www/zend.loc
+    CustomLog ${APACHE_LOG_DIR}/zend.loc.access.log combined
+    ErrorLog ${APACHE_LOG_DIR}/zend.loc.error.log
+    #AssignUserID andrey andrey
+    <Directory /var/www/zend.loc>
+	Options -Includes -Indexes -ExecCGI
+	AllowOverride All
+    </Directory>
+</VirtualHost>
+5. включить сайт sudo a2ensite zend.loc или выключить sudo a2dissite zend.loc
+6. перезагрузить сервер sudo service apache2 restart
+7. настройка хостов в файле sudo vim /etc/hosts

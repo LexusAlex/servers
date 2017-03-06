@@ -1,0 +1,2 @@
+
+docker-compose up -d запуск как демона

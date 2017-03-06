@@ -1,0 +1,18 @@
+Установка сложнее чем apache
+
+service nginx status проверка статуса
+
+/etc/nginx/nginx.conf конфигурация
+
+apt-get install php7.0-fpm nginx работает с php только через fastCgi
+
+sudo service php7.0-fpm restart перезапуск
+
+
+location ~ \.php$ {
+   try_files $uri =404;
+   fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+   fastcgi_index index.php;
+   include fastcgi_params;
+   fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+}
